@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-warm-white: #FAF8F4;
+  --color-gold: #C9A86A;
+  --color-stone: #E9E4DB;
+  --color-charcoal: #1F1F1F;
+  --color-muted: #6B6B6B;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+
+@layer base {
+  body {
+    @apply bg-warm-white text-charcoal font-sans antialiased;
+  }
+  
+  ::selection {
+    @apply bg-gold/30 text-charcoal;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)];
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
