@@ -1,9 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { ArrowRight } from 'lucide-react';
 
-const images = [
+const defaultImages = [
   {
     src: '/2000-x-1333-1024x682.png',
     aspect: 'aspect-[4/5]',
@@ -30,7 +30,15 @@ const images = [
   },
 ];
 
-type GalleryImage = (typeof images)[number];
+export type GalleryImage = {
+  _id?: string;
+  src: string;
+  aspect: string;
+  title: string;
+  desc: string;
+  category?: string;
+  order?: number;
+};
 
 function ParallaxImage({
   image,
@@ -88,26 +96,50 @@ function ParallaxImage({
   );
 }
 
-/** Masonry grid used on the home gallery section and the full `/gallery` page */
-export function GalleryGrid() {
+export function GalleryGrid({ images: propImages }: { images?: GalleryImage[] }) {
+  const imgs = propImages && propImages.length >= 4 ? propImages : defaultImages;
+
   return (
     <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-12 md:gap-8">
       <div className="space-y-8 md:col-span-5 md:mt-16 md:space-y-14">
-        <ParallaxImage image={images[0]} offset={40} />
-        <ParallaxImage image={images[2]} offset={30} />
+        <ParallaxImage image={imgs[0]} offset={40} />
+        {imgs[2] && <ParallaxImage image={imgs[2]} offset={30} />}
       </div>
 
       <div className="space-y-8 md:col-span-7 md:space-y-14">
-        <ParallaxImage image={images[1]} offset={60} />
-        <div className="md:px-16">
-          <ParallaxImage image={images[3]} offset={45} />
-        </div>
+        {imgs[1] && <ParallaxImage image={imgs[1]} offset={60} />}
+        {imgs[3] && (
+          <div className="md:px-16">
+            <ParallaxImage image={imgs[3]} offset={45} />
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
+export function useGalleryImages() {
+  const [mainImages, setMainImages] = useState<GalleryImage[]>(defaultImages);
+  const [extraImages, setExtraImages] = useState<GalleryImage[]>([]);
+
+  useEffect(() => {
+    fetch('/api/gallery')
+      .then((r) => r.json())
+      .then((data: GalleryImage[]) => {
+        const main = data.filter((i) => i.category === 'main');
+        const extra = data.filter((i) => i.category === 'extra');
+        if (main.length > 0) setMainImages(main);
+        if (extra.length > 0) setExtraImages(extra);
+      })
+      .catch(() => {});
+  }, []);
+
+  return { mainImages, extraImages };
+}
+
 export function Gallery() {
+  const { mainImages } = useGalleryImages();
+
   return (
     <section className="relative overflow-hidden bg-warm-white py-12 md:py-20">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" aria-hidden />
@@ -155,7 +187,7 @@ export function Gallery() {
           </motion.div>
         </div>
 
-        <GalleryGrid />
+        <GalleryGrid images={mainImages} />
       </div>
     </section>
   );

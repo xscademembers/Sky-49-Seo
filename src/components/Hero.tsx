@@ -1,5 +1,104 @@
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2, Check } from 'lucide-react';
+
+function HeroForm() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !phone) return;
+
+    setStatus('loading');
+    try {
+      const [firstName, ...rest] = name.trim().split(' ');
+      const res = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName,
+          lastName: rest.join(' ') || '',
+          email: '',
+          phone,
+          interest: 'EOI',
+          message: 'Submitted via Hero EOI form',
+        }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus('success');
+      setName('');
+      setPhone('');
+      setTimeout(() => setStatus('idle'), 4000);
+    } catch {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="flex flex-col items-center justify-center py-6 text-center">
+        <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+          <Check className="h-6 w-6 text-green-600" />
+        </div>
+        <h3 className="font-serif text-xl text-charcoal">Thank You!</h3>
+        <p className="mt-1 text-sm text-muted">We'll get back to you shortly.</p>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <h3 className="font-serif text-2xl mb-2 text-charcoal">Request a EOI</h3>
+      <p className="text-sm text-muted mb-6">Enter before the address appreciates.</p>
+
+      <form className="space-y-4" onSubmit={handleSubmit}>
+        <div>
+          <input
+            type="text"
+            placeholder="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="w-full bg-white/50 border border-stone/50 px-4 py-3 rounded-none focus:outline-none focus:border-gold transition-colors font-light text-sm"
+          />
+        </div>
+        <div>
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+            className="w-full bg-white/50 border border-stone/50 px-4 py-3 rounded-none focus:outline-none focus:border-gold transition-colors font-light text-sm"
+          />
+        </div>
+        {status === 'error' && (
+          <p className="text-xs text-red-500">Something went wrong. Please try again.</p>
+        )}
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="w-full bg-charcoal text-white px-6 py-4 flex items-center justify-between group hover:bg-gold transition-colors duration-500 disabled:opacity-60"
+        >
+          {status === 'loading' ? (
+            <>
+              <span className="tracking-wide text-xs font-medium">Submitting...</span>
+              <Loader2 className="w-4 h-4 animate-spin" />
+            </>
+          ) : (
+            <>
+              <span className="tracking-wide text-xs font-medium">Register EOI Now</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </>
+          )}
+        </button>
+      </form>
+    </>
+  );
+}
 
 export function Hero() {
   return (
@@ -65,21 +164,7 @@ export function Hero() {
         transition={{ duration: 1, delay: 1, ease: [0.25, 0.1, 0.25, 1] }}
         className="absolute bottom-0 right-0 md:bottom-12 md:right-12 w-full md:w-[400px] glass-panel p-8 md:rounded-2xl z-20"
       >
-        <h3 className="font-serif text-2xl mb-2 text-charcoal">Request a EOI</h3>
-        <p className="text-sm text-muted mb-6">Enter before the address appreciates.</p>
-        
-        <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-          <div>
-            <input type="text" placeholder="Your Name" className="w-full bg-white/50 border border-stone/50 px-4 py-3 rounded-none focus:outline-none focus:border-gold transition-colors font-light text-sm" />
-          </div>
-          <div>
-            <input type="tel" placeholder="Phone Number" className="w-full bg-white/50 border border-stone/50 px-4 py-3 rounded-none focus:outline-none focus:border-gold transition-colors font-light text-sm" />
-          </div>
-          <button className="w-full bg-charcoal text-white px-6 py-4 flex items-center justify-between group hover:bg-gold transition-colors duration-500">
-            <span className="tracking-wide text-xs font-medium">Register EOI Now</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </form>
+        <HeroForm />
       </motion.div>
 
       {/* Scroll Indicator */}

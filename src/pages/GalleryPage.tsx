@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { GalleryGrid } from '../components/Gallery';
+import { GalleryGrid, useGalleryImages } from '../components/Gallery';
 import { Footer } from '../components/Footer';
 import { FloatingCTA } from '../components/FloatingCTA';
 
-const extraImages = [
+const defaultExtra = [
   {
     src: '/3-1-1024x682.png',
     title: 'Landscaped Arrival',
@@ -20,6 +20,9 @@ const extraImages = [
 ];
 
 export function GalleryPage() {
+  const { mainImages, extraImages } = useGalleryImages();
+  const extras = extraImages.length > 0 ? extraImages : defaultExtra;
+
   useEffect(() => {
     document.title = 'Gallery | THE SKY49';
   }, []);
@@ -64,7 +67,7 @@ export function GalleryPage() {
             </p>
           </motion.div>
 
-          <GalleryGrid />
+          <GalleryGrid images={mainImages} />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -74,7 +77,7 @@ export function GalleryPage() {
           >
             <h2 className="mb-8 font-serif text-2xl text-charcoal md:text-3xl">More perspectives</h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
-              {extraImages.map((item) => (
+              {extras.map((item) => (
                 <div
                   key={item.src}
                   className="group overflow-hidden rounded-[1.5rem] border border-stone/40 bg-white shadow-lg"
