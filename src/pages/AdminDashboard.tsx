@@ -302,48 +302,38 @@ function ContactsTab({
 
 function GalleryTab({
   gallery,
-  onUpload,
+  onAddImage,
   onDelete,
   uploading,
 }: {
   gallery: GalleryItem[];
-  onUpload: (formData: FormData) => void;
+  onAddImage: (data: { src: string; title: string; desc: string; category: string; aspect: string; order: number }) => void;
   onDelete: (id: string) => void;
   uploading: boolean;
 }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [desc, setDesc] = useState('');
+  const [src, setSrc] = useState('');
   const [category, setCategory] = useState('main');
   const [aspect, setAspect] = useState('aspect-[16/9]');
-  const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState('');
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const f = e.target.files?.[0];
-    if (f) {
-      setFile(f);
-      setPreview(URL.createObjectURL(f));
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!file || !title) return;
+    if (!src || !title) return;
 
-    const fd = new FormData();
-    fd.append('image', file);
-    fd.append('title', title);
-    fd.append('desc', desc);
-    fd.append('category', category);
-    fd.append('aspect', aspect);
-    fd.append('order', String(gallery.length));
-    onUpload(fd);
+    onAddImage({
+      src,
+      title,
+      desc,
+      category,
+      aspect,
+      order: gallery.length,
+    });
 
     setTitle('');
     setDesc('');
-    setFile(null);
-    setPreview('');
+    setSrc('');
     setShowForm(false);
   };
 
@@ -397,6 +387,22 @@ function GalleryTab({
             </div>
             <div className="md:col-span-2">
               <label className="mb-2 block text-[10px] font-medium uppercase tracking-widest text-muted">
+                Image URL *
+              </label>
+              <input
+                type="url"
+                value={src}
+                onChange={(e) => setSrc(e.target.value)}
+                required
+                className="w-full rounded-lg border border-stone/40 px-4 py-2.5 text-sm text-charcoal focus:border-gold focus:outline-none"
+                placeholder="https://example.com/image.jpg or /image-name.png"
+              />
+              <p className="mt-1 text-xs text-muted">
+                Use a full URL (https://...) or a path to an image in the public folder (e.g. /image.png)
+              </p>
+            </div>
+            <div className="md:col-span-2">
+              <label className="mb-2 block text-[10px] font-medium uppercase tracking-widest text-muted">
                 Description
               </label>
               <input
@@ -423,38 +429,26 @@ function GalleryTab({
                 <option value="aspect-[16/10]">16:10 (Wide)</option>
               </select>
             </div>
-            <div>
-              <label className="mb-2 block text-[10px] font-medium uppercase tracking-widest text-muted">
-                Image File *
-              </label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                required
-                className="w-full rounded-lg border border-stone/40 px-4 py-2 text-sm text-charcoal file:mr-4 file:rounded-md file:border-0 file:bg-gold/10 file:px-3 file:py-1 file:text-xs file:font-medium file:text-gold focus:outline-none"
-              />
-            </div>
           </div>
 
-          {preview && (
+          {src && (
             <div className="mt-4">
-              <img src={preview} alt="Preview" className="h-40 rounded-lg object-cover" />
+              <img src={src} alt="Preview" className="h-40 rounded-lg object-cover" onError={(e) => (e.currentTarget.style.display = 'none')} />
             </div>
           )}
 
           <button
             type="submit"
-            disabled={uploading || !file || !title}
+            disabled={uploading || !src || !title}
             className="mt-5 inline-flex items-center gap-2 rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-charcoal transition-colors hover:bg-gold/80 disabled:opacity-50"
           >
             {uploading ? (
               <>
-                <Loader2 className="h-4 w-4 animate-spin" /> Uploading...
+                <Loader2 className="h-4 w-4 animate-spin" /> Saving...
               </>
             ) : (
               <>
-                <Upload className="h-4 w-4" /> Upload Image
+                <Upload className="h-4 w-4" /> Add Image
               </>
             )}
           </button>
@@ -594,13 +588,13 @@ export function AdminDashboard() {
     setContacts((prev) => prev.filter((c) => c._id !== id));
   };
 
-  const handleUploadImage = async (formData: FormData) => {
+  const handleAddImage = async (data: { src: string; title: string; desc: string; category: string; aspect: string; order: number }) => {
     setUploading(true);
     try {
       const res = await fetch('/api/gallery', {
         method: 'POST',
-        headers: { Authorization: `Bearer ${getToken()}` },
-        body: formData,
+        headers: authHeaders(),
+        body: JSON.stringify(data),
       });
       if (res.ok) {
         const newImage = await res.json();
@@ -700,7 +694,7 @@ export function AdminDashboard() {
         {tab === 'gallery' && (
           <GalleryTab
             gallery={gallery}
-            onUpload={handleUploadImage}
+            onAddImage={handleAddImage}
             onDelete={handleDeleteImage}
             uploading={uploading}
           />

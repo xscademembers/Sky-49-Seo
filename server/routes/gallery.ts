@@ -2,28 +2,34 @@ import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { GalleryImage } from '../models/Gallery';
 import { authMiddleware } from '../middleware/auth';
 
-const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+let upload: multer.Multer | null = null;
+try {
+  const uploadDir = path.join(os.tmpdir(), 'sky49-uploads');
+  if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadDir),
-  filename: (_req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
-    cb(null, unique);
-  },
-});
+  const storage = multer.diskStorage({
+    destination: (_req, _file, cb) => cb(null, uploadDir),
+    filename: (_req, file, cb) => {
+      const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`;
+      cb(null, unique);
+    },
+  });
 
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    const allowed = /\.(jpg|jpeg|png|gif|webp)$/i;
-    cb(null, allowed.test(path.extname(file.originalname)));
-  },
-});
+  upload = multer({
+    storage,
+    limits: { fileSize: 10 * 1024 * 1024 },
+    fileFilter: (_req, file, cb) => {
+      const allowed = /\.(jpg|jpeg|png|gif|webp)$/i;
+      cb(null, allowed.test(path.extname(file.originalname)));
+    },
+  });
+} catch {
+  upload = null;
+}
 
 const router = Router();
 
@@ -36,14 +42,19 @@ router.get('/', async (_req, res) => {
   }
 });
 
-router.post('/', authMiddleware, upload.single('image'), async (req, res) => {
+const uploadMiddleware = (req: any, res: any, next: any) => {
+  if (upload) {
+    upload.single('image')(req, res, next);
+  } else {
+    next();
+  }
+};
+
+router.post('/', authMiddleware, uploadMiddleware, async (req, res) => {
   try {
-    let src = req.body.src || '';
-    if (req.file) {
-      src = `/uploads/${req.file.filename}`;
-    }
+    const src = req.body.src || '';
     if (!src) {
-      res.status(400).json({ error: 'No image file or URL provided' });
+      res.status(400).json({ error: 'Please provide an image URL' });
       return;
     }
 
@@ -72,14 +83,7 @@ router.patch('/:id', authMiddleware, async (req, res) => {
 
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
-    const image = await GalleryImage.findById(req.params.id);
-    if (image) {
-      if (image.src.startsWith('/uploads/')) {
-        const filePath = path.join(process.cwd(), 'public', image.src);
-        if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-      }
-      await GalleryImage.findByIdAndDelete(req.params.id);
-    }
+    await GalleryImage.findByIdAndDelete(req.params.id);
     res.json({ success: true });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
