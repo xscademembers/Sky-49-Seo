@@ -31,10 +31,10 @@ export function FloorPlans() {
   const currentPlan = plans.find(p => p.id === activePlan);
 
   return (
-    <section className="py-24 md:py-40 bg-warm-white">
+    <section className="py-12 md:py-20 bg-warm-white">
       <div className="container mx-auto px-6 md:px-12">
         
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export function FloorPlans() {
         </div>
 
         {/* Custom Tabs */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           {plans.map((plan) => (
             <button
               key={plan.id}
@@ -83,7 +83,7 @@ export function FloorPlans() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center"
+              className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
             >
               <div className="md:col-span-5 space-y-6">
                 <h3 className="font-serif text-3xl text-charcoal">{currentPlan?.name}</h3>
@@ -93,10 +93,13 @@ export function FloorPlans() {
                 <p className="text-muted font-light leading-relaxed">
                   {currentPlan?.desc}
                 </p>
-                <button className="mt-8 group flex items-center gap-4 text-charcoal hover:text-gold transition-colors">
-                  <span className="uppercase tracking-widest text-xs font-medium">Download Floor Plan</span>
-                  <div className="w-8 h-[1px] bg-charcoal group-hover:bg-gold group-hover:w-12 transition-all duration-300"></div>
-                </button>
+                <a
+                  href="#contact"
+                  className="group mt-8 inline-flex items-center gap-4 text-charcoal transition-colors hover:text-gold"
+                >
+                  <span className="text-xs font-medium uppercase tracking-widest">Download Floor Plan</span>
+                  <div className="h-[1px] w-8 bg-charcoal transition-all duration-300 group-hover:w-12 group-hover:bg-gold"></div>
+                </a>
               </div>
               
               <div className="md:col-span-7 bg-white p-8 rounded-xl shadow-sm border border-stone/30">

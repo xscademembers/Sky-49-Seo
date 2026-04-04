@@ -3,10 +3,10 @@ import { MapPin, Building, Briefcase, Plane } from 'lucide-react';
 
 export function Location() {
   return (
-    <section className="py-24 md:py-40 bg-stone/20 relative overflow-hidden">
+    <section className="py-12 md:py-20 bg-stone/20 relative overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           
           <motion.div 
             initial={{ opacity: 0, x: -40 }}
@@ -15,8 +15,7 @@ export function Location() {
             transition={{ duration: 1 }}
           >
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-gold font-serif italic text-xl">03</span>
-              <div className="h-[1px] w-12 bg-stone"></div>
+              <div className="h-[1px] w-8 bg-gold"></div>
               <span className="uppercase tracking-[0.2em] text-xs font-medium text-muted">The Address</span>
             </div>
             

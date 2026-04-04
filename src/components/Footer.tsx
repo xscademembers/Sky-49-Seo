@@ -2,10 +2,10 @@ import { motion } from 'motion/react';
 
 export function Footer() {
   return (
-    <footer className="bg-warm-white pt-24 pb-12 border-t border-stone">
+    <footer className="bg-warm-white pt-14 pb-10 border-t border-stone">
       <div className="container mx-auto px-6 md:px-12">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-12">
           <div className="md:col-span-5">
             <h2 className="font-serif text-3xl text-charcoal mb-6">THE SKY49</h2>
             <p className="text-muted font-light max-w-sm mb-8">
@@ -48,7 +48,7 @@ export function Footer() {
             <ul className="space-y-4 text-sm font-light text-muted">
               <li>Tellapur Road, Hyderabad, Telangana 500019</li>
               <li><a href="mailto:sales@thesky49.com" className="hover:text-gold transition-colors">sales@thesky49.com</a></li>
-              <li><a href="tel:+919876543210" className="hover:text-gold transition-colors">+91 98765 43210</a></li>
+              <li><a href="tel:+918790066990" className="hover:text-gold transition-colors">+91 8790066990</a></li>
             </ul>
           </div>
         </div>

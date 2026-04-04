@@ -1,12 +1,44 @@
-import { motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+import { animate, motion, useInView } from 'motion/react';
 import { TrendingUp, ShieldCheck, Clock } from 'lucide-react';
+
+function CountUpRupee({
+  target,
+  delay = 0,
+  className,
+}: {
+  target: number;
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const controls = animate(0, target, {
+      duration: 1.25,
+      delay,
+      ease: [0.22, 0.65, 0.35, 1],
+      onUpdate: (latest) => setValue(Math.round(latest)),
+    });
+    return () => controls.stop();
+  }, [isInView, target, delay]);
+
+  return (
+    <span ref={ref} className={className}>
+      ₹{value.toLocaleString('en-IN')}
+    </span>
+  );
+}
 
 export function Pricing() {
   return (
-    <section className="py-24 md:py-40 bg-stone/30 relative">
+    <section className="py-12 md:py-20 bg-stone/30 relative">
       <div className="container mx-auto px-6 md:px-12">
         
-        <div className="text-center max-w-3xl mx-auto mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -30,7 +62,7 @@ export function Pricing() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Price Cards */}
           <div className="lg:col-span-5 space-y-6">
@@ -43,7 +75,7 @@ export function Pricing() {
               <div className="absolute top-0 left-0 w-1 h-full bg-gold"></div>
               <p className="text-sm uppercase tracking-widest text-muted mb-2">Current Opportunity</p>
               <div className="flex items-baseline gap-2">
-                <span className="font-serif text-5xl text-charcoal">₹7,199</span>
+                <CountUpRupee target={7199} className="font-serif text-5xl text-charcoal" />
                 <span className="text-muted">/ sft</span>
               </div>
               <p className="text-sm text-charcoal/60 mt-4 font-light">Exclusive pre-launch pricing for early visionaries.</p>
@@ -58,7 +90,7 @@ export function Pricing() {
             >
               <p className="text-sm uppercase tracking-widest text-white/60 mb-2">Projected Value</p>
               <div className="flex items-baseline gap-2">
-                <span className="font-serif text-5xl text-gold">₹11,000</span>
+                <CountUpRupee target={11000} delay={0.2} className="font-serif text-5xl text-gold" />
                 <span className="text-white/60">/ sft</span>
               </div>
               <p className="text-sm text-white/60 mt-4 font-light">Estimated future potential based on Tellapur's growth corridor.</p>
@@ -73,7 +105,7 @@ export function Pricing() {
               viewport={{ once: true }}
               className="glass-panel p-8 md:p-12"
             >
-              <div className="flex justify-between items-end mb-12 border-b border-stone pb-8">
+              <div className="flex justify-between items-end mb-8 border-b border-stone pb-6">
                 <div>
                   <h4 className="font-serif text-2xl text-charcoal mb-2">Wealth Narrative</h4>
                   <p className="text-muted font-light text-sm">Tellapur Luxury Real Estate Index</p>
@@ -142,7 +174,7 @@ export function Pricing() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-3 gap-4 mt-12 pt-8 border-t border-stone">
+              <div className="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-stone">
                 <div className="text-center">
                   <ShieldCheck className="w-6 h-6 mx-auto text-gold mb-3" />
                   <p className="text-xs uppercase tracking-wider text-muted">RERA Approved</p>

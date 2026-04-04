@@ -30,9 +30,12 @@ export function FloatingCTA() {
           <span className="font-serif text-lg text-charcoal leading-none">₹7,199/sft</span>
         </div>
         <div className="w-[1px] h-8 bg-stone"></div>
-        <button className="text-sm font-medium uppercase tracking-wider text-charcoal hover:text-gold transition-colors">
+        <a
+          href="#contact"
+          className="text-sm font-medium uppercase tracking-wider text-charcoal transition-colors hover:text-gold"
+        >
           Inquire Now
-        </button>
+        </a>
       </div>
 
       <button className="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-105 transition-transform">

@@ -2,9 +2,9 @@ import { motion } from 'motion/react';
 
 export function Story() {
   return (
-    <section className="py-24 md:py-40 bg-warm-white relative">
+    <section className="py-12 md:py-20 bg-warm-white relative">
       <div className="container mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           
           <motion.div 
             initial={{ opacity: 0, y: 40 }}
@@ -14,7 +14,6 @@ export function Story() {
             className="order-2 md:order-1"
           >
             <div className="flex items-center gap-4 mb-8">
-              <span className="text-gold font-serif italic text-xl">01</span>
               <div className="h-[1px] w-12 bg-stone"></div>
               <span className="uppercase tracking-[0.2em] text-xs font-medium text-muted">The Architecture</span>
             </div>
@@ -31,10 +30,13 @@ export function Story() {
               Every line, every angle, and every material has been meticulously chosen to create a living experience that is both visually stunning and profoundly comfortable. Expansive glass facades invite natural light, while thoughtfully curated interiors provide a canvas for your personal legacy.
             </p>
             
-            <button className="group flex items-center gap-4 text-charcoal hover:text-gold transition-colors">
-              <span className="uppercase tracking-widest text-xs font-medium">Discover the Vision</span>
-              <div className="w-8 h-[1px] bg-charcoal group-hover:bg-gold group-hover:w-12 transition-all duration-300"></div>
-            </button>
+            <a
+              href="#contact"
+              className="group inline-flex items-center gap-4 text-charcoal transition-colors hover:text-gold"
+            >
+              <span className="text-xs font-medium tracking-wide">Download Brochure</span>
+              <div className="h-[1px] w-8 bg-charcoal transition-all duration-300 group-hover:w-12 group-hover:bg-gold"></div>
+            </a>
           </motion.div>
 
           <motion.div 
@@ -46,8 +48,8 @@ export function Story() {
           >
             <div className="aspect-[3/4] overflow-hidden relative">
               <img 
-                src="https://images.unsplash.com/photo-1613490900233-141c5560d75d?q=80&w=1967&auto=format&fit=crop" 
-                alt="Architectural Detail" 
+                src="/2-1024x682.png" 
+                alt="THE SKY49 architecture" 
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 border-[12px] border-warm-white/20"></div>
@@ -62,8 +64,8 @@ export function Story() {
               className="absolute -bottom-12 -left-12 w-2/3 aspect-square border-8 border-warm-white shadow-2xl hidden md:block"
             >
               <img 
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop" 
-                alt="Interior Detail" 
+                src="/12%20(1).png" 
+                alt="THE SKY49 interior detail" 
                 className="w-full h-full object-cover"
               />
             </motion.div>
