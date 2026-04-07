@@ -27,6 +27,7 @@ function HeroForm() {
         }),
       });
       if (!res.ok) throw new Error();
+      window.gtag_report_conversion?.();
       setStatus('success');
       setName('');
       setPhone('');

@@ -34,6 +34,7 @@ export function Contact() {
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error('Failed to submit');
+      window.gtag_report_conversion?.();
       setStatus('success');
       setForm({ firstName: '', lastName: '', email: '', phone: '', interest: '', message: '', wantsBrochure: false });
       setTimeout(() => setStatus('idle'), 4000);
