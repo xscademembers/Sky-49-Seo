@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyNav from '../components/StickyNav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title={`Privacy Policy | ${site.name} Hyderabad`}
+  description="Privacy policy for Sky49 Hyderabad website, lead forms, and enquiry data usage."
+  canonicalPath="/privacy-policy"
+>
+  <StickyNav />
+  <main class="bg-warm-white py-16 md:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-medium uppercase tracking-[0.25em] text-muted">Legal</p>
+      <h1 class="mt-3 font-serif text-4xl text-charcoal md:text-5xl">Privacy Policy</h1>
+      <p class="mt-3 text-sm text-muted">Last updated: April 13, 2026</p>
+
+      <div class="mt-8 space-y-6 text-sm font-light leading-relaxed text-muted">
+        <p>
+          This policy explains how {site.fullName} collects, uses, and protects personal information shared on
+          this website, including through contact, callback, and EOI forms.
+        </p>
+        <p>
+          We may collect details such as name, phone number, email address, preferred budget, and location
+          preferences when you submit enquiries. This information is used to schedule visits, share project
+          updates, and provide relevant sales support.
+        </p>
+        <p>
+          Your data may be processed by authorized internal sales teams and approved service providers for CRM,
+          communication, analytics, and support workflows. We do not sell personal data to unrelated third
+          parties.
+        </p>
+        <p>
+          We use standard security controls to protect submitted data; however, no internet transmission is
+          completely risk-free. By using this website, you acknowledge this operational limitation.
+        </p>
+        <p>
+          You may request correction, deletion, or communication opt-out by contacting us at
+          <a href={`mailto:${site.email}`} class="text-gold underline-offset-4 hover:underline"> {site.email}</a>
+          or calling
+          <a href={`tel:${site.phoneTel}`} class="text-gold underline-offset-4 hover:underline"> {site.phone}</a>.
+        </p>
+        <p>
+          This policy may be updated from time to time. Continued use of the site indicates acceptance of the
+          latest version.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

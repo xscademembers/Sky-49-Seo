@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyNav from '../components/StickyNav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title={`Terms and Conditions | ${site.name} Hyderabad`}
+  description="Terms and conditions governing use of the Sky49 Hyderabad website and enquiry process."
+  canonicalPath="/terms-and-conditions"
+>
+  <StickyNav />
+  <main class="bg-warm-white py-16 md:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <p class="text-xs font-medium uppercase tracking-[0.25em] text-muted">Legal</p>
+      <h1 class="mt-3 font-serif text-4xl text-charcoal md:text-5xl">Terms and Conditions</h1>
+      <p class="mt-3 text-sm text-muted">Last updated: April 13, 2026</p>
+
+      <div class="mt-8 space-y-6 text-sm font-light leading-relaxed text-muted">
+        <p>
+          By accessing this website, you agree to these terms. If you do not agree, please discontinue use of
+          the website and its enquiry tools.
+        </p>
+        <p>
+          All project content, pricing references, amenities, floor plans, and timelines shown on this website
+          are indicative unless explicitly confirmed in official documentation. Availability and specifications
+          may change without prior notice.
+        </p>
+        <p>
+          This website does not constitute a legal offer to sell. Booking, allotment, and purchase decisions
+          are governed by executed agreements, approvals, and statutory disclosures.
+        </p>
+        <p>
+          Users agree not to misuse website forms, interfere with platform security, or submit misleading or
+          unauthorized information. We reserve the right to limit or deny service in such cases.
+        </p>
+        <p>
+          Third-party services, map embeds, and analytics tools may operate under their own terms and privacy
+          policies. We are not responsible for external service outages or policy changes.
+        </p>
+        <p>
+          For clarifications, contact
+          <a href={`mailto:${site.email}`} class="text-gold underline-offset-4 hover:underline"> {site.email}</a>
+          or
+          <a href={`tel:${site.phoneTel}`} class="text-gold underline-offset-4 hover:underline"> {site.phone}</a>.
+        </p>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Layout>

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://www.thesky49.com/sitemap.xml
 Sitemap: https://www.thesky49.com/sitemap-index.xml
