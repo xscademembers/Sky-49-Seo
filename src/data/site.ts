@@ -27,9 +27,9 @@ export const site = {
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.3196016508928!2d78.27522347594073!3d17.44441060115836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcbed17e91b4b4b%3A0x19787397a2d26a29!2sThe%20SKY%2049%20by%20Ananda%20Prosper!5e0!3m2!1sen!2sin!4v1775729985100!5m2!1sen!2sin',
   youtubeWalkthroughId: 'I5DbiUkT05M',
   heroImage: {
-    src: '/images/sky49-hero.avif',
-    width: 1600,
-    height: 900,
+    src: '/2000-x-1333-1024x682.png',
+    width: 1024,
+    height: 682,
     alt:
       'Sky49 Tellapur ultra-luxury 3 and 4 BHK apartment towers in Hyderabad',
   },
