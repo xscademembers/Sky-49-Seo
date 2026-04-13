@@ -1,15 +1,14 @@
 ---
-import { Image } from 'astro:assets';
 import { site } from '../../data/site';
 ---
 
 <section
   id="hero"
-  class="relative isolate min-h-[88svh] overflow-hidden scroll-mt-0"
+  class="relative isolate overflow-hidden scroll-mt-0"
   aria-labelledby="hero-heading"
 >
   <div class="absolute inset-0">
-    <Image
+    <img
       src={site.heroImage.src}
       alt={site.heroImage.alt}
       width={site.heroImage.width}
@@ -18,19 +17,11 @@ import { site } from '../../data/site';
       loading="eager"
       fetchpriority="high"
       decoding="async"
-      formats={['avif', 'webp']}
     />
-    <div
-      class="absolute inset-0 bg-gradient-to-b from-warm-white/95 via-warm-white/75 to-warm-white/90"
-      aria-hidden="true"
-    />
-    <div
-      class="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(201,168,106,0.18),transparent_55%)]"
-      aria-hidden="true"
-    />
+    <div class="hero-overlay absolute inset-0" aria-hidden="true" />
   </div>
 
-  <div class="relative z-10 mx-auto flex min-h-[88svh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 lg:px-10 lg:pb-24 lg:pt-32">
+  <div class="hero-shell relative z-10 flex flex-col justify-end px-4 pb-16 pt-28 sm:px-6 lg:px-10 lg:pb-24 lg:pt-32">
     <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-7">
         <p
@@ -51,7 +42,7 @@ import { site } from '../../data/site';
         <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
           <a
             href="#contact"
-            class="inline-flex items-center justify-center rounded-full bg-charcoal px-8 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-lg transition hover:bg-gold hover:text-charcoal"
+            class="hero-cta inline-flex items-center justify-center bg-charcoal px-8 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-charcoal"
           >
             Enquire Now
           </a>
@@ -70,9 +61,8 @@ import { site } from '../../data/site';
 
       <div class="lg:col-span-5">
         <div
-          class="glass-panel gold-shimmer relative overflow-hidden rounded-3xl p-6 shadow-[var(--shadow-soft)] sm:p-8"
+          class="hero-eoi-card relative overflow-hidden rounded-3xl border border-stone/50 bg-white/92 p-6 shadow-sm sm:p-8"
         >
-          <div class="pointer-events-none absolute -right-8 -top-8 h-40 w-40 rounded-full bg-gold/20 blur-3xl" />
           <p class="font-serif text-3xl leading-[1.15] text-charcoal">Request a EOI</p>
           <p class="mt-2 text-sm text-muted sm:text-base">Enter before the address appreciates.</p>
 

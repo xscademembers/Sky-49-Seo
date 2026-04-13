@@ -1,5 +1,21 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-400.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/playfair-600.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
 @theme {
   --color-warm-white: #faf8f4;
   --color-gold: #c9a86a;
@@ -8,8 +24,8 @@
   --color-charcoal: #1f1f1f;
   --color-muted: #6b6b6b;
 
-  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
 
   --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.06);
   --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.05);
