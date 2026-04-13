@@ -9,6 +9,7 @@ import Highlights from '../components/sections/Highlights.astro';
 import WhySky49Compare from '../components/sections/WhySky49Compare.astro';
 import Specifications from '../components/sections/Specifications.astro';
 import FloorPlans from '../components/sections/FloorPlans.astro';
+import SitePlan from '../components/sections/SitePlan.astro';
 import AmenitiesGallery from '../components/sections/AmenitiesGallery.astro';
 import LocationProximity from '../components/sections/LocationProximity.astro';
 import YouTubeWalkthrough from '../components/sections/YouTubeWalkthrough.astro';
@@ -27,18 +28,21 @@ import { site } from '../data/site';
     <main>
       <Hero />
       <StatsBar />
-      <AboutSky49 />
-      <InstagramReels />
-      <Highlights />
-      <WhySky49Compare />
-      <Specifications />
-      <FloorPlans />
-      <AmenitiesGallery />
-      <LocationProximity />
-      <YouTubeWalkthrough />
-      <QuickFactsGEO />
-      <FAQSection />
-      <ContactSection />
+      <div class="defer-render-sections">
+        <AboutSky49 />
+        <InstagramReels />
+        <Highlights />
+        <WhySky49Compare />
+        <Specifications />
+        <FloorPlans />
+        <SitePlan />
+        <AmenitiesGallery />
+        <LocationProximity />
+        <YouTubeWalkthrough />
+        <QuickFactsGEO />
+        <FAQSection />
+        <ContactSection />
+      </div>
     </main>
     <Footer />
     <MobileStickyCTA />

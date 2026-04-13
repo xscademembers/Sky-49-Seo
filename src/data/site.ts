@@ -28,8 +28,8 @@ export const site = {
   youtubeWalkthroughId: 'I5DbiUkT05M',
   heroImage: {
     src: '/images/sky49-hero.avif',
-    width: 900,
-    height: 506,
+    width: 1600,
+    height: 900,
     alt:
       'Sky49 Tellapur ultra-luxury 3 and 4 BHK apartment towers in Hyderabad',
   },

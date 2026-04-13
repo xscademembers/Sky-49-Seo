@@ -48,7 +48,7 @@ import { site } from '../../data/site';
           </a>
           <a
             href="#contact"
-            class="glass-panel inline-flex items-center justify-center rounded-full px-8 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-charcoal transition hover:border-gold/60"
+            class="inline-flex items-center justify-center rounded-full border border-stone/50 bg-white/80 px-8 py-4 text-center text-xs font-semibold uppercase tracking-[0.2em] text-charcoal transition hover:border-gold/60"
           >
             Download Brochure
           </a>
@@ -59,9 +59,9 @@ import { site } from '../../data/site';
         </p>
       </div>
 
-      <div class="lg:col-span-5">
+      <div class="hero-lead-phase2 lg:col-span-5">
         <div
-          class="hero-eoi-card relative overflow-hidden rounded-3xl border border-stone/50 bg-white/92 p-6 shadow-sm sm:p-8"
+          class="hero-eoi-card relative overflow-hidden rounded-3xl border border-stone/50 bg-white/92 p-6 sm:p-8"
         >
           <p class="font-serif text-3xl leading-[1.15] text-charcoal">Request a EOI</p>
           <p class="mt-2 text-sm text-muted sm:text-base">Enter before the address appreciates.</p>
@@ -100,3 +100,22 @@ import { site } from '../../data/site';
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (() => {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+
+    const revealLead = () => {
+      window.setTimeout(() => {
+        hero.classList.add('hero-phase-2');
+      }, 180);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', revealLead, { once: true });
+    } else {
+      revealLead();
+    }
+  })();
+</script>

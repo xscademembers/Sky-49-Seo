@@ -44,6 +44,11 @@
 }
 
 @layer utilities {
+  .defer-render-sections {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 6000px;
+  }
+
   .glass-panel {
     @apply border border-white/50 bg-white/75 shadow-[var(--shadow-soft)] backdrop-blur-md;
   }
