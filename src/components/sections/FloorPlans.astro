@@ -1,60 +1,38 @@
 ---
-const plans = [
-  {
-    name: '3 BHK luxury',
-    sqft: 'Spacious formats (exact sizes on enquiry)',
-    notes:
-      'Designed for families needing storage, staff workflows, and bright living-dining flow—popular with buyers comparing Sky49 price against other Tellapur luxury options.',
-  },
-  {
-    name: '4 BHK premium',
-    sqft: 'Expanded living zones (exact sizes on enquiry)',
-    notes:
-      'Ideal for multi-generational households and CXO buyers who want private corners for work calls, wellness routines, and entertaining without compromising privacy.',
-  },
-  {
-    name: 'Sky residences',
-    sqft: 'Upper floors / special formats (subject to availability)',
-    notes:
-      'Higher floors can offer differentiated skyline perspectives across Hyderabad’s west corridor—confirm availability, premiums, and facing with the sales team.',
-  },
-] as const;
+import { floorPlanRows } from '../../data/site';
 ---
 
-<section id="floor-plans" class="scroll-mt-24 bg-warm-white py-16 md:py-24">
+<section id="floor-plans" class="scroll-mt-24 bg-[#e9d8a8] py-16 md:py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-    <div class="mb-12 max-w-3xl">
-      <div class="mb-4 flex items-center gap-4">
-        <div class="h-px w-10 bg-gold" aria-hidden="true"></div>
-        <p class="text-xs font-medium uppercase tracking-[0.25em] text-muted">Floor plans</p>
-      </div>
-      <h2 class="font-serif text-3xl text-charcoal md:text-4xl">Sky49 floor plans &amp; formats</h2>
-      <p class="mt-4 text-muted">
-        Request CAD-accurate plans during consultation. Keywords like <strong>Sky49 floor plans</strong> and
-        <strong>Sky49 3 BHK</strong> map to real inventory cycles—availability changes monthly in a launch of
-        this scale.
-      </p>
-      <p class="mt-4 text-sm font-light leading-relaxed text-muted">
-        When reviewing plans, study column grids, bedroom separation, kitchen service entries, and balcony
-        depth—small differences materially affect furniture plans and resale liquidity. For investment buyers,
-        compare the rent-per-sqft assumptions in Osman Nagar against adjacent micro-markets, but anchor your
-        thesis in real tenant demand drivers: proximity to office corridors, school access, and community
-        quality—not headline yield promises.
+    <div class="max-w-4xl">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-charcoal/80">Floor Plan</p>
+      <h2 class="mt-3 font-serif text-4xl leading-tight text-charcoal sm:text-5xl">
+        Empowering Your Decision for a Refined Dream Living
+      </h2>
+      <p class="mt-4 max-w-3xl text-sm leading-relaxed text-charcoal/80">
+        Thoughtfully designed 3 &amp; 4 BHK luxury floor plans at SKY49 are crafted to maximize space, privacy,
+        natural light, and everyday comfort.
       </p>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-3">
+    <div class="mt-10 border-t border-charcoal/25">
       {
-        plans.map((p) => (
-          <article class="glass-panel flex flex-col rounded-2xl p-8">
-            <h3 class="font-serif text-2xl text-charcoal">{p.name}</h3>
-            <p class="mt-2 text-xs font-semibold uppercase tracking-widest text-gold">{p.sqft}</p>
-            <p class="mt-4 flex-1 text-sm font-light leading-relaxed text-muted">{p.notes}</p>
+        floorPlanRows.map((row) => (
+          <article class="grid items-center gap-5 border-b border-charcoal/25 py-4 md:grid-cols-[90px_minmax(220px,1fr)_260px_220px] md:gap-x-12 md:py-6">
+            <p class="text-4xl font-semibold leading-none text-charcoal">{row.label}</p>
+            <h3 class="text-xl text-charcoal">{row.name}</h3>
+            <img
+              src={row.image}
+              alt={row.name}
+              class="h-60 w-80 justify-self-start border border-charcoal/15 object-cover md:h-44 md:w-44"
+              loading="lazy"
+              decoding="async"
+            />
             <a
-              href="#contact"
-              class="mt-8 inline-flex items-center justify-center rounded-full bg-charcoal py-3 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-gold hover:text-charcoal"
+              href={row.brochureHref}
+              class="inline-flex justify-self-start items-center justify-center rounded-full bg-charcoal px-5 py-2 text-xs font-medium text-white transition md:justify-self-end hover:bg-black"
             >
-              Request plan pack
+              Download Brochure →
             </a>
           </article>
         ))

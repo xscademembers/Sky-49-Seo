@@ -1,45 +1,89 @@
 ---
 const specs = [
-  { label: 'Structure', value: 'RCC frame engineered for high-rise performance (indicative)' },
-  { label: 'Facades', value: 'Premium glazing & skyline-responsive cladding strategy' },
-  { label: 'Lobbies', value: 'Double-height arrival experience with hospitality-grade finishes' },
-  { label: 'Elevators', value: 'High-speed passenger lifts across residential zones' },
-  { label: 'Parking', value: 'Structured parking with EV-ready provisions (subject to plan)' },
-  { label: 'Security', value: 'Multi-tier access control and CCTV backbone' },
-  { label: 'Sustainability', value: 'Rainwater, energy-conscious services—confirm latest green features' },
+  {
+    label: 'Structure',
+    value: 'RCC frame engineered for high-rise performance (indicative)',
+    icon: 'M3 21h18M5 21V10l7-6 7 6v11M9 21v-6h6v6',
+  },
+  {
+    label: 'Facades',
+    value: 'Premium glazing & skyline-responsive cladding strategy',
+    icon: 'M4 20V4h16v16M9 4v16M15 4v16M4 10h16M4 14h16',
+  },
+  {
+    label: 'Lobbies',
+    value: 'Double-height arrival experience with hospitality-grade finishes',
+    icon: 'M4 20h16M6 20V7h12v13M9 7V4h6v3M9 12h6',
+  },
+  {
+    label: 'Elevators',
+    value: 'High-speed passenger lifts across residential zones',
+    icon: 'M7 21V4h10v17M10 8l2-2 2 2M10 17l2 2 2-2',
+  },
+  {
+    label: 'Parking',
+    value: 'Structured parking with EV-ready provisions (subject to plan)',
+    icon: 'M5 14h14l-1.5-5h-11zM7 14l-1 3M17 14l1 3M8 18h.01M16 18h.01M9 11h4a2 2 0 100-4H9v8',
+  },
+  {
+    label: 'Security',
+    value: 'Multi-tier access control and CCTV backbone',
+    icon: 'M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3z',
+  },
+  {
+    label: 'Sustainability',
+    value: 'Rainwater, energy-conscious services—confirm latest green features',
+    icon: 'M12 21c4.5-2.5 7-6 7-10V4c-3 0-5 1-7 3-2-2-4-3-7-3v7c0 4 2.5 7.5 7 10z',
+  },
 ] as const;
 ---
 
-<section id="specifications" class="scroll-mt-24 border-t border-stone/40 bg-beige/30 py-16 md:py-24">
+<section id="specifications" class="scroll-mt-24 border-t border-stone/40 bg-[#f6f3ed] py-16 text-charcoal md:py-24">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
-    <div class="mb-10 max-w-3xl">
+    <div class="mb-12 grid gap-6 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8">
       <div class="mb-4 flex items-center gap-4">
-        <div class="h-px w-10 bg-gold" aria-hidden="true"></div>
-        <p class="text-xs font-medium uppercase tracking-[0.25em] text-muted">Specifications</p>
+        <div class="h-px w-10 bg-gold/90" aria-hidden="true"></div>
+        <p class="text-xs font-semibold uppercase tracking-[0.25em] text-charcoal/65">Specifications</p>
       </div>
-      <h2 class="font-serif text-3xl text-charcoal md:text-4xl">Sky49 specifications with practical clarity</h2>
-      <p class="mt-4 text-muted">
+      <h2 class="font-serif text-3xl text-charcoal md:text-5xl">Sky49 specifications with practical clarity</h2>
+      <p class="mt-4 max-w-3xl text-charcoal/70">
         Use this section as a quick diligence snapshot for <strong>Sky49 Tellapur</strong>. Final drawings,
         brands, and compliance documents should always be validated during your site visit and official review.
       </p>
+      </div>
+      <div class="rounded-2xl border border-stone/50 bg-white p-5 shadow-sm lg:col-span-4">
+        <p class="text-[11px] uppercase tracking-[0.22em] text-charcoal/60">Snapshot</p>
+        <p class="mt-2 text-3xl font-semibold text-charcoal">{specs.length}</p>
+        <p class="mt-1 text-sm text-charcoal/70">Core specification categories covered</p>
+      </div>
     </div>
 
-    <div class="grid gap-8 lg:grid-cols-12">
-      <div class="grid gap-4 sm:grid-cols-2 lg:col-span-8">
+    <div class="grid gap-8">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
           specs.map((row) => (
-            <article class="group rounded-2xl border border-stone/50 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[var(--shadow-soft)] sm:p-6">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">{row.label}</p>
-              <p class="mt-3 text-sm font-light leading-relaxed text-charcoal/85">{row.value}</p>
+            <article class="group rounded-2xl border border-stone/50 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[var(--shadow-soft)]">
+              <div class="flex items-start gap-4">
+                <span class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-charcoal text-white shadow-sm">
+                  <svg viewBox="0 0 24 24" fill="none" class="h-5 w-5" aria-hidden="true">
+                    <path d={row.icon} stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-charcoal/70">{row.label}</p>
+                  <p class="mt-2 text-sm leading-relaxed text-charcoal/80">{row.value}</p>
+                </div>
+              </div>
             </article>
           ))
         }
       </div>
 
-      <aside class="rounded-2xl border border-gold/30 bg-gradient-to-b from-white to-warm-white/95 p-6 shadow-[var(--shadow-soft)] lg:col-span-4 lg:self-start">
-        <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">Before you finalize</p>
+      <aside class="rounded-2xl border border-gold/30 bg-gradient-to-r from-white to-[#f4ecda] p-6 shadow-sm md:p-7">
+        <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-charcoal/65">Before you finalize</p>
         <h3 class="mt-2 font-serif text-2xl text-charcoal">Diligence checklist</h3>
-        <ul class="mt-5 space-y-3 text-sm font-light leading-relaxed text-muted">
+        <ul class="mt-5 grid gap-3 text-sm leading-relaxed text-charcoal/80 md:grid-cols-2">
           <li class="flex gap-3">
             <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold"></span>
             Verify tower-wise drawings, floor plans, and area statements.

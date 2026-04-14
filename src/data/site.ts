@@ -84,3 +84,72 @@ export const quickFactsRows = [
 export const instagramReelEmbeds: string[] = [];
 
 export const instagramProfile = 'https://www.instagram.com/';
+
+export const currentSiteUpdateImages = [
+  {
+    src: '/site - 1.png',
+    alt: 'Sky49 construction update image 1',
+  },
+  {
+    src: '/site - 2.png',
+    alt: 'Sky49 construction update image 2',
+  },
+  {
+    src: '/site - 3.png',
+    alt: 'Sky49 construction update image 3',
+  },
+  {
+    src: '/site - 4.png',
+    alt: 'Sky49 construction update image 4',
+  },
+  {
+    src: '/site - 5.png',
+    alt: 'Sky49 construction update image 5',
+  },
+  {
+    src: '/site - 6.png',
+    alt: 'Sky49 construction update image 6',
+  },
+] as const;
+
+export const floorPlanRows = [
+  {
+    label: '01/',
+    name: 'Master Plan',
+    image: '/MasterPlan.jpg',
+    brochureHref: '#contact',
+  },
+  {
+    label: '02/',
+    name: 'Tower - A Floor Plan',
+    image: '/Block-A.jpg',
+    brochureHref: '#contact',
+  },
+  {
+    label: '03/',
+    name: 'Tower - B Floor Plan',
+    image: '/Block-B.jpg',
+    brochureHref: '#contact',
+  },
+  {
+    label: '04/',
+    name: 'Tower - C Floor Plan',
+    image: '/Block-C.jpg',
+    brochureHref: '#contact',
+  },
+  {
+    label: '05/',
+    name: 'Tower - D Floor Plan',
+    image: '/Blcok-D.jpg',
+    brochureHref: '#contact',
+  },
+] as const;
+
+export const projectGalleryImages = [
+  { src: '/site - 1.png', alt: 'Sky49 project gallery image 1' },
+  { src: '/site - 2.png', alt: 'Sky49 project gallery image 2' },
+  { src: '/site - 3.png', alt: 'Sky49 project gallery image 3' },
+  { src: '/site - 4.png', alt: 'Sky49 project gallery image 4' },
+  { src: '/site - 5.png', alt: 'Sky49 project gallery image 5' },
+  { src: '/site - 6.png', alt: 'Sky49 project gallery image 6' },
+] as const;

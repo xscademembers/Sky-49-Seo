@@ -1,0 +1,30 @@
+---
+import { currentSiteUpdateImages } from '../../data/site';
+---
+
+<section id="current-site-updates" class="scroll-mt-24 bg-[#efefef] py-14 md:py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
+    <p class="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-charcoal/70">
+      Current Site Updates
+    </p>
+    <h2 class="mt-3 text-center font-serif text-4xl text-charcoal sm:text-5xl md:text-6xl">
+      See Your Future Home Taking Shape
+    </h2>
+
+    <div class="mt-10 grid gap-4 md:grid-cols-3">
+      {
+        currentSiteUpdateImages.map((img, i) => (
+          <figure class="overflow-hidden bg-white/60">
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="aspect-[4/3] w-full object-cover"
+              loading={i < 3 ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
