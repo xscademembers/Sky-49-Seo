@@ -80,11 +80,6 @@ export const quickFactsRows = [
   { label: 'Home loan', value: 'Assistance available with leading banks (T&C)' },
 ] as const;
 
-/** Optional Instagram reel embed URLs (full embed iframe src). Leave empty to show CTA cards. */
-export const instagramReelEmbeds: string[] = [];
-
-export const instagramProfile = 'https://www.instagram.com/';
-
 export const currentSiteUpdateImages = [
   {
     src: '/site - 1.png',
