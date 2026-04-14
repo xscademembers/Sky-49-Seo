@@ -34,6 +34,8 @@ export default function ContactForm() {
     e.preventDefault();
     if (!form.firstName || !form.email || !form.phone || !form.interest) return;
 
+    // Track lead-intent conversion on submit click.
+    window.gtag_report_conversion?.();
     setStatus('loading');
     try {
       const res = await fetch('/api/contacts', {
@@ -42,7 +44,6 @@ export default function ContactForm() {
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error('fail');
-      window.gtag_report_conversion?.();
       setStatus('success');
       setForm({
         firstName: '',

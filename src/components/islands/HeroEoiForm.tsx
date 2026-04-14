@@ -2,6 +2,12 @@ import { useState } from 'preact/hooks';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
+declare global {
+  interface Window {
+    gtag_report_conversion?: (url?: string) => boolean;
+  }
+}
+
 export default function HeroEoiForm() {
   const [phone, setPhone] = useState('');
   const [status, setStatus] = useState<Status>('idle');
@@ -10,6 +16,8 @@ export default function HeroEoiForm() {
     e.preventDefault();
     if (!phone.trim()) return;
 
+    // Track lead-intent conversion on submit click.
+    window.gtag_report_conversion?.();
     setStatus('loading');
     try {
       const res = await fetch('/api/contacts', {
