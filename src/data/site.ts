@@ -8,10 +8,10 @@ export const site = {
     'Sky49 Tellapur offers G+49 ultra-luxury 3 & 4 BHK apartments across 4 towers with 1 lakh+ sq ft amenities, RERA-approved. Book a site visit in Hyderabad’s elite growth corridor.',
   url: import.meta.env.PUBLIC_SITE_URL || 'https://www.thesky49.com',
   locale: 'en_IN',
-  phone: '+91 8790066990',
-  phoneTel: '+918790066990',
+  phone: '+91 72074 56767',
+  phoneTel: '+917207456767',
   email: 'sales@thesky49.com',
-  whatsapp: '918790066990',
+  whatsapp: '917207456767',
   address: {
     streetAddress: 'Osman Nagar, Tellapur',
     addressLocality: 'Hyderabad',
