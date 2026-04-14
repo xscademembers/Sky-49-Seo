@@ -1,5 +1,6 @@
 ---
 import { projectGalleryImages } from '../../data/site';
+import ProjectGalleryFeed from '../islands/ProjectGalleryFeed';
 ---
 
 <section id="project-gallery" class="scroll-mt-24 bg-[#efefef] py-16 md:py-20">
@@ -11,20 +12,6 @@ import { projectGalleryImages } from '../../data/site';
       Experience the Lifestyle Before You Live It
     </h2>
 
-    <div class="mt-8 grid gap-4 md:grid-cols-3">
-      {
-        projectGalleryImages.map((img, i) => (
-          <figure class="overflow-hidden bg-white/50">
-            <img
-              src={img.src}
-              alt={img.alt}
-              class="aspect-[16/10] w-full object-cover"
-              loading={i < 3 ? 'eager' : 'lazy'}
-              decoding="async"
-            />
-          </figure>
-        ))
-      }
-    </div>
+    <ProjectGalleryFeed client:load fallbackImages={[...projectGalleryImages]} />
   </div>
 </section>

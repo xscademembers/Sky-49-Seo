@@ -7,13 +7,14 @@
     "node": ">=20"
   },
   "scripts": {
-    "dev": "astro dev --port 3000 --host",
+    "dev": "concurrently -k -n api,astro -c yellow,cyan \"npm run server\" \"npm run dev:web\"",
+    "dev:web": "astro dev --port 3000 --host",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "dev:legacy": "vite --config legacy/vite.config.ts --port 3001 --host",
     "server": "tsx server/index.ts",
-    "dev:full": "concurrently -k -n api,astro -c yellow,cyan \"npm run server\" \"npm run dev\"",
+    "dev:full": "concurrently -k -n api,astro -c yellow,cyan \"npm run server\" \"npm run dev:web\"",
     "lint": "astro check && tsc --noEmit",
     "clean": "rm -rf dist .astro"
   },

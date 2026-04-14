@@ -1,5 +1,6 @@
 ---
 import { site } from '../../data/site';
+import HeroEoiForm from '../islands/HeroEoiForm';
 ---
 
 <section
@@ -52,24 +53,7 @@ import { site } from '../../data/site';
           <p class="font-serif text-3xl leading-[1.15] text-charcoal">Request a EOI</p>
           <p class="mt-2 text-sm text-muted sm:text-base">Priority callback from our advisory desk.</p>
 
-          <form class="mt-6 space-y-4" aria-label="Hero mini phone form">
-            <label class="sr-only" for="hero-eoi-phone">Phone Number</label>
-            <input
-              id="hero-eoi-phone"
-              name="phone"
-              type="tel"
-              placeholder="Enter your phone number"
-              class="w-full rounded-none border border-stone/50 bg-white/70 px-4 py-3 text-sm text-charcoal placeholder:text-muted focus:border-gold focus:outline-none"
-              autocomplete="tel"
-            />
-
-            <a
-              href="#hero-lead-form"
-              class="inline-flex w-full items-center justify-center bg-charcoal px-6 py-4 text-sm font-semibold text-white transition hover:bg-gold hover:text-charcoal"
-            >
-              <span>Get Callback</span>
-            </a>
-          </form>
+          <HeroEoiForm client:load />
         </div>
       </div>
     </div>

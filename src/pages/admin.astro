@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AdminPortal from '../components/islands/AdminPortal';
+---
+
+<Layout title="Admin | Sky49" description="Sky49 admin dashboard" canonicalPath="/admin">
+  <main class="min-h-screen bg-[#f6f3ed] py-8">
+    <AdminPortal client:load />
+  </main>
+</Layout>
