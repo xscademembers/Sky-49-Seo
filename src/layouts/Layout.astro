@@ -56,8 +56,6 @@ const jsonLd = buildJsonLd({
     />
     <link rel="icon" href="/The-SKy-49-LoGO.png" type="image/png" />
     <link rel="preload" as="image" href="/2000-x-1333-1024x682.png" fetchpriority="high" />
-    <link rel="preload" href="/fonts/playfair-600.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="dns-prefetch" href="https://i.ytimg.com" />
     <style is:inline>
@@ -70,12 +68,9 @@ const jsonLd = buildJsonLd({
         margin-inline: auto;
       }
       #hero-heading {
-        font-family: Georgia, 'Times New Roman', serif;
+        font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
         letter-spacing: -0.02em;
         line-height: 1.05;
-      }
-      html.fonts-ready #hero-heading {
-        font-family: 'Playfair Display', Georgia, serif;
       }
       #hero .hero-eoi-card {
         width: min(100%, 440px);
@@ -98,15 +93,6 @@ const jsonLd = buildJsonLd({
         transform: translateY(0);
       }
     </style>
-    <script is:inline>
-      (() => {
-        if (!('fonts' in document)) return;
-        document.fonts.ready.then(() => {
-          document.documentElement.classList.add('fonts-ready');
-        });
-      })();
-    </script>
-
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18067596329"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
