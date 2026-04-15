@@ -10,7 +10,7 @@ type ContactLead = {
   message?: string;
   notes?: string;
   wantsBrochure?: boolean;
-  isRead: boolean;
+  isRead: boolean | string;
   createdAt: string;
 };
 
@@ -74,7 +74,11 @@ export default function AdminPortal() {
     void loadData();
   }, [token]);
 
-  const unreadCount = useMemo(() => leads.filter((x) => !x.isRead).length, [leads]);
+  const unreadCount = useMemo(() => leads.filter((x) => x.isRead !== true).length, [leads]);
+  const orderedLeads = useMemo(
+    () => [...leads].sort((a, b) => Number(a.isRead === true) - Number(b.isRead === true)),
+    [leads]
+  );
 
   async function loadData() {
     setDataLoading(true);
@@ -92,7 +96,11 @@ export default function AdminPortal() {
 
       if (!leadsRes.ok || !galleryRes.ok) throw new Error('Failed to fetch admin data');
 
-      const leadsData = (await leadsRes.json()) as ContactLead[];
+      const leadsData = ((await leadsRes.json()) as ContactLead[]).map((lead) => ({
+        ...lead,
+        // Guard against legacy string/null values from old records.
+        isRead: lead.isRead === true,
+      }));
       const galleryData = (await galleryRes.json()) as GalleryImage[];
       setLeads(leadsData);
       setGallery(galleryData);
@@ -298,7 +306,7 @@ export default function AdminPortal() {
               ))}
             </div>
           ) : null}
-          {!dataLoading ? leads.map((lead) => (
+          {!dataLoading ? orderedLeads.map((lead) => (
             <article class="rounded-xl border border-stone/40 bg-white p-4 shadow-sm">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <p class="font-semibold text-charcoal">
@@ -306,6 +314,11 @@ export default function AdminPortal() {
                 </p>
                 <p class="text-xs text-muted">{new Date(lead.createdAt).toLocaleString('en-IN')}</p>
               </div>
+              {lead.isRead !== true ? (
+                <p class="mt-2 inline-flex rounded-full bg-gold/20 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-charcoal">
+                  New Lead
+                </p>
+              ) : null}
               <p class="mt-1 text-sm text-muted">
                 {lead.email || 'No email'} • {lead.phone} • {lead.interest}
               </p>
@@ -321,7 +334,7 @@ export default function AdminPortal() {
                 />
               </div>
               <div class="mt-3 flex gap-2">
-                {!lead.isRead ? (
+                {lead.isRead !== true ? (
                   <button class="rounded-lg bg-charcoal px-3 py-1.5 text-xs text-white" onClick={() => markRead(lead._id)}>
                     Mark read
                   </button>
