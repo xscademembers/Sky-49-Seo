@@ -42,6 +42,7 @@ function authHeaders() {
 export default function AdminPortal() {
   const [token, setToken] = useState('');
   const [loading, setLoading] = useState(true);
+  const [dataLoading, setDataLoading] = useState(false);
   const [tab, setTab] = useState<Tab>('leads');
 
   const [email, setEmail] = useState('');
@@ -76,6 +77,7 @@ export default function AdminPortal() {
   const unreadCount = useMemo(() => leads.filter((x) => !x.isRead).length, [leads]);
 
   async function loadData() {
+    setDataLoading(true);
     setDataError('');
     try {
       const [leadsRes, galleryRes] = await Promise.all([
@@ -96,6 +98,8 @@ export default function AdminPortal() {
       setGallery(galleryData);
     } catch (err: any) {
       setDataError(err?.message || 'Unable to load admin data');
+    } finally {
+      setDataLoading(false);
     }
   }
 
@@ -264,13 +268,13 @@ export default function AdminPortal() {
           class={`rounded-lg px-4 py-2 text-sm font-medium ${tab === 'leads' ? 'bg-charcoal text-white' : 'bg-stone/20 text-charcoal'}`}
           onClick={() => setTab('leads')}
         >
-          Leads ({leads.length})
+          Leads ({dataLoading ? '...' : leads.length})
         </button>
         <button
           class={`rounded-lg px-4 py-2 text-sm font-medium ${tab === 'gallery' ? 'bg-charcoal text-white' : 'bg-stone/20 text-charcoal'}`}
           onClick={() => setTab('gallery')}
         >
-          Gallery ({gallery.length})
+          Gallery ({dataLoading ? '...' : gallery.length})
         </button>
       </div>
 
@@ -278,8 +282,23 @@ export default function AdminPortal() {
 
       {tab === 'leads' ? (
         <div class="space-y-3">
-          <p class="text-sm text-muted">Unread: {unreadCount}</p>
-          {leads.map((lead) => (
+          <p class="text-sm text-muted">Unread: {dataLoading ? '...' : unreadCount}</p>
+          {dataLoading ? (
+            <div class="space-y-3" aria-live="polite" aria-busy="true">
+              {Array.from({ length: 4 }).map((_, idx) => (
+                <article class="animate-pulse rounded-xl border border-stone/40 bg-white p-4 shadow-sm" key={`lead-skeleton-${idx}`}>
+                  <div class="h-4 w-48 rounded bg-stone/30"></div>
+                  <div class="mt-3 h-3 w-64 rounded bg-stone/20"></div>
+                  <div class="mt-2 h-3 w-full rounded bg-stone/20"></div>
+                  <div class="mt-4 flex gap-2">
+                    <div class="h-7 w-20 rounded bg-stone/20"></div>
+                    <div class="h-7 w-24 rounded bg-stone/20"></div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : null}
+          {!dataLoading ? leads.map((lead) => (
             <article class="rounded-xl border border-stone/40 bg-white p-4 shadow-sm">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <p class="font-semibold text-charcoal">
@@ -318,8 +337,8 @@ export default function AdminPortal() {
                 </button>
               </div>
             </article>
-          ))}
-          {leads.length === 0 ? <p class="text-sm text-muted">No leads yet.</p> : null}
+          )) : null}
+          {!dataLoading && leads.length === 0 ? <p class="text-sm text-muted">No leads yet.</p> : null}
         </div>
       ) : (
         <div>
@@ -369,7 +388,18 @@ export default function AdminPortal() {
           </form>
 
           <div class="space-y-3">
-            {gallery.map((img) => (
+            {dataLoading ? (
+              Array.from({ length: 3 }).map((_, idx) => (
+                <article class="animate-pulse grid gap-3 rounded-xl border border-stone/40 bg-white p-4 shadow-sm md:grid-cols-[120px_1fr_auto]" key={`gallery-skeleton-${idx}`}>
+                  <div class="h-24 w-full rounded-lg bg-stone/20"></div>
+                  <div class="space-y-2">
+                    <div class="h-9 w-full rounded bg-stone/20"></div>
+                    <div class="h-9 w-full rounded bg-stone/20"></div>
+                  </div>
+                  <div class="h-9 w-16 rounded bg-stone/20"></div>
+                </article>
+              ))
+            ) : gallery.map((img) => (
               <article class="grid gap-3 rounded-xl border border-stone/40 bg-white p-4 shadow-sm md:grid-cols-[120px_1fr_auto]">
                 <img src={img.src} alt={img.title} class="h-24 w-full rounded-lg object-cover" />
                 <div class="space-y-2">
@@ -402,7 +432,7 @@ export default function AdminPortal() {
                 </div>
               </article>
             ))}
-            {gallery.length === 0 ? <p class="text-sm text-muted">No gallery images yet.</p> : null}
+            {!dataLoading && gallery.length === 0 ? <p class="text-sm text-muted">No gallery images yet.</p> : null}
           </div>
         </div>
       )}
