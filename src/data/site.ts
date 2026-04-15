@@ -112,31 +112,31 @@ export const floorPlanRows = [
     label: '01/',
     name: 'Master Plan',
     image: '/MasterPlan.jpg',
-    brochureHref: '#contact',
+    brochureHref: '#lead-form',
   },
   {
     label: '02/',
     name: 'Tower - A Floor Plan',
     image: '/Block-A.jpg',
-    brochureHref: '#contact',
+    brochureHref: '#lead-form',
   },
   {
     label: '03/',
     name: 'Tower - B Floor Plan',
     image: '/Block-B.jpg',
-    brochureHref: '#contact',
+    brochureHref: '#lead-form',
   },
   {
     label: '04/',
     name: 'Tower - C Floor Plan',
     image: '/Block-C.jpg',
-    brochureHref: '#contact',
+    brochureHref: '#lead-form',
   },
   {
     label: '05/',
     name: 'Tower - D Floor Plan',
     image: '/Blcok-D.jpg',
-    brochureHref: '#contact',
+    brochureHref: '#lead-form',
   },
 ] as const;
 
