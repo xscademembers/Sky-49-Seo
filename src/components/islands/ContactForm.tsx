@@ -83,7 +83,7 @@ export default function ContactForm() {
             value={form.firstName}
             onInput={onChange}
             required
-            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-stone/40 focus:border-gold focus:outline-none"
+            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-charcoal/55 focus:border-gold focus:outline-none"
             placeholder="First name"
             autoComplete="given-name"
           />
@@ -94,7 +94,7 @@ export default function ContactForm() {
             name="lastName"
             value={form.lastName}
             onInput={onChange}
-            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-stone/40 focus:border-gold focus:outline-none"
+            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-charcoal/55 focus:border-gold focus:outline-none"
             placeholder="Last name"
             autoComplete="family-name"
           />
@@ -110,7 +110,7 @@ export default function ContactForm() {
             value={form.email}
             onInput={onChange}
             required
-            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-stone/40 focus:border-gold focus:outline-none"
+            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-charcoal/55 focus:border-gold focus:outline-none"
             placeholder="you@company.com"
             autoComplete="email"
           />
@@ -123,7 +123,7 @@ export default function ContactForm() {
             value={form.phone}
             onInput={onChange}
             required
-            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-stone/40 focus:border-gold focus:outline-none"
+            class="w-full border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-charcoal/55 focus:border-gold focus:outline-none"
             placeholder="+91"
             autoComplete="tel"
           />
@@ -155,7 +155,7 @@ export default function ContactForm() {
           value={form.message}
           onInput={onChange}
           rows={3}
-          class="w-full resize-none border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-stone/40 focus:border-gold focus:outline-none"
+          class="w-full resize-none border-b border-stone bg-transparent pb-3 text-charcoal placeholder:text-charcoal/55 focus:border-gold focus:outline-none"
           placeholder="Preferred call time, bank loan needs, etc."
         />
       </div>
