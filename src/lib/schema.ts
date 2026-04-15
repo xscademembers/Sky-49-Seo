@@ -127,7 +127,7 @@ export function buildJsonLd(opts: {
     description:
       'Walkthrough and lifestyle context for Sky49 Tellapur ultra-luxury apartments.',
     thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
-    uploadDate: '2025-01-01',
+    uploadDate: '2025-01-01T00:00:00+05:30',
     contentUrl: `https://www.youtube.com/watch?v=${videoId}`,
     embedUrl: `https://www.youtube.com/embed/${videoId}`,
   };

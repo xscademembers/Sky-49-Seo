@@ -12,6 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/api/auth', authRoutes);
+
 let seeded = false;
 app.use(async (_req, res, next) => {
   try {
@@ -26,7 +28,6 @@ app.use(async (_req, res, next) => {
   }
 });
 
-app.use('/api/auth', authRoutes);
 app.use('/api/contacts', contactRoutes);
 app.use('/api/gallery', galleryRoutes);
 

@@ -84,18 +84,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(async (_req: Request, res: Response, next: NextFunction) => {
-  try {
-    await connectDB();
-    await seedGallery();
-    next();
-  } catch (err: any) {
-    res.status(500).json({ error: 'Database connection failed', details: err.message });
-  }
-});
-
-// ── Auth ──
-
+// Auth login should stay available even when DB is temporarily unavailable.
 app.post('/api/auth/login', (req: Request, res: Response) => {
   const { email, password } = req.body;
   const adminEmail = process.env.ADMIN_EMAIL || 'admin@thesky49.com';
@@ -106,6 +95,16 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
     res.json({ token, email });
   } else {
     res.status(401).json({ error: 'Invalid credentials' });
+  }
+});
+
+app.use(async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    await connectDB();
+    await seedGallery();
+    next();
+  } catch (err: any) {
+    res.status(500).json({ error: 'Database connection failed', details: err.message });
   }
 });
 
