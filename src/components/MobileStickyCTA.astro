@@ -4,30 +4,31 @@ const wa = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent('Hi, I want
 ---
 
 <div
-  class="fixed inset-x-0 bottom-0 z-40 border-t border-stone/40 bg-warm-white/95 px-3 py-3 backdrop-blur-md sm:hidden"
+  class="fixed inset-x-0 bottom-0 z-40 bg-transparent px-3 pb-3 pt-2 sm:hidden"
   role="region"
   aria-label="Quick actions"
 >
-  <div class="mx-auto flex max-w-lg gap-2">
+  <div class="mx-auto flex max-w-lg items-center gap-3">
     <a
-      href={`tel:${site.phoneTel}`}
-      class="flex flex-1 items-center justify-center rounded-full border border-charcoal bg-charcoal py-3 text-[10px] font-semibold uppercase tracking-widest text-white"
+      href="/#contact"
+      class="flex min-w-0 flex-1 items-center justify-between rounded-full border border-white/50 bg-[#cfcfcf] px-5 py-3 shadow-[0_8px_22px_rgba(0,0,0,0.28)]"
     >
-      Call now
+      <span class="min-w-0">
+        <span class="block text-[10px] font-semibold uppercase tracking-[0.2em] text-charcoal/60">Starting From</span>
+        <span class="block truncate font-serif text-[18px] leading-tight text-charcoal">&#8377;7,199/sft</span>
+      </span>
+      <span class="ml-4 shrink-0 text-[11px] font-semibold uppercase tracking-[0.18em] text-charcoal">Inquire Now</span>
     </a>
     <a
       href={wa}
       target="_blank"
       rel="noopener noreferrer"
-      class="flex flex-1 items-center justify-center rounded-full border border-gold bg-gold/15 py-3 text-[10px] font-semibold uppercase tracking-widest text-charcoal"
+      aria-label="Chat on WhatsApp"
+      class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_8px_22px_rgba(0,0,0,0.28)]"
     >
-      WhatsApp
-    </a>
-    <a
-      href="/#contact"
-      class="flex flex-1 items-center justify-center rounded-full border border-stone bg-white py-3 text-[10px] font-semibold uppercase tracking-widest text-charcoal"
-    >
-      Visit
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 fill-current">
+        <path d="M20.52 3.48A11.86 11.86 0 0012.06 0C5.57 0 .3 5.27.3 11.76c0 2.07.54 4.09 1.56 5.87L0 24l6.56-1.72a11.74 11.74 0 005.5 1.4h.01c6.49 0 11.76-5.27 11.76-11.76 0-3.14-1.22-6.09-3.31-8.44zm-8.46 18.2h-.01a9.8 9.8 0 01-4.98-1.36l-.36-.22-3.9 1.02 1.04-3.8-.24-.39a9.8 9.8 0 01-1.5-5.17c0-5.41 4.4-9.81 9.81-9.81 2.62 0 5.08 1.02 6.94 2.88a9.74 9.74 0 012.87 6.93c0 5.41-4.4 9.82-9.8 9.82zm5.38-7.36c-.3-.15-1.78-.88-2.06-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.95 1.18-.17.2-.35.22-.65.07-.3-.15-1.28-.47-2.43-1.5-.9-.8-1.5-1.78-1.67-2.08-.18-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.03-1.05 2.5 0 1.48 1.08 2.9 1.23 3.1.15.2 2.12 3.24 5.13 4.54.72.31 1.28.5 1.72.63.72.23 1.37.2 1.88.12.57-.08 1.78-.73 2.04-1.43.25-.7.25-1.3.18-1.43-.08-.13-.27-.2-.57-.35z" />
+      </svg>
     </a>
   </div>
 </div>
