@@ -1,4 +1,6 @@
 import dotenv from 'dotenv';
+// Load local development secrets first, then fall back to .env.
+dotenv.config({ path: '.env.local' });
 dotenv.config();
 
 import app from './app';
