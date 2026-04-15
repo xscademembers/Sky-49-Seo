@@ -29,6 +29,7 @@ const contactSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   interest: { type: String, required: true },
   message: { type: String, default: '' },
+  notes: { type: String, default: '' },
   wantsBrochure: { type: Boolean, default: false },
   isRead: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
@@ -132,6 +133,20 @@ app.get('/api/contacts', authMiddleware, async (_req: Request, res: Response) =>
 app.patch('/api/contacts/:id/read', authMiddleware, async (req: Request, res: Response) => {
   try {
     const contact = await Contact.findByIdAndUpdate(req.params.id, { isRead: true }, { new: true });
+    res.json(contact);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.patch('/api/contacts/:id/notes', authMiddleware, async (req: Request, res: Response) => {
+  try {
+    const notes = typeof req.body?.notes === 'string' ? req.body.notes.trim() : '';
+    const contact = await Contact.findByIdAndUpdate(req.params.id, { notes }, { new: true });
+    if (!contact) {
+      res.status(404).json({ error: 'Lead not found' });
+      return;
+    }
     res.json(contact);
   } catch (err: any) {
     res.status(500).json({ error: err.message });

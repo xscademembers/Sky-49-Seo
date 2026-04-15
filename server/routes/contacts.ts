@@ -35,6 +35,24 @@ router.patch('/:id/read', authMiddleware, async (req, res) => {
   }
 });
 
+router.patch('/:id/notes', authMiddleware, async (req, res) => {
+  try {
+    const notes = typeof req.body?.notes === 'string' ? req.body.notes.trim() : '';
+    const contact = await Contact.findByIdAndUpdate(
+      req.params.id,
+      { notes },
+      { new: true }
+    );
+    if (!contact) {
+      res.status(404).json({ error: 'Lead not found' });
+      return;
+    }
+    res.json(contact);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 router.delete('/:id', authMiddleware, async (req, res) => {
   try {
     await Contact.findByIdAndDelete(req.params.id);

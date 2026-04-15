@@ -8,6 +8,7 @@ type ContactLead = {
   phone: string;
   interest: string;
   message?: string;
+  notes?: string;
   wantsBrochure?: boolean;
   isRead: boolean;
   createdAt: string;
@@ -52,6 +53,7 @@ export default function AdminPortal() {
   const [gallery, setGallery] = useState<GalleryImage[]>([]);
   const [dataError, setDataError] = useState('');
   const [saving, setSaving] = useState(false);
+  const [savingLeadId, setSavingLeadId] = useState('');
 
   const [newImage, setNewImage] = useState({
     src: '',
@@ -135,9 +137,26 @@ export default function AdminPortal() {
     setLeads((prev) => prev.map((x) => (x._id === id ? { ...x, isRead: true } : x)));
   }
 
-  async function deleteLead(id: string) {
-    await fetch(`/api/contacts/${id}`, { method: 'DELETE', headers: authHeaders() });
-    setLeads((prev) => prev.filter((x) => x._id !== id));
+  function updateLeadNotes(id: string, notes: string) {
+    setLeads((prev) => prev.map((x) => (x._id === id ? { ...x, notes } : x)));
+  }
+
+  async function saveLeadNotes(id: string) {
+    const lead = leads.find((x) => x._id === id);
+    if (!lead) return;
+    setSavingLeadId(id);
+    try {
+      const res = await fetch(`/api/contacts/${id}/notes`, {
+        method: 'PATCH',
+        headers: authHeaders(),
+        body: JSON.stringify({ notes: lead.notes || '' }),
+      });
+      if (!res.ok) throw new Error('Failed to save notes');
+    } catch (err: any) {
+      alert(err?.message || 'Failed to save notes');
+    } finally {
+      setSavingLeadId('');
+    }
   }
 
   async function addImage(e: Event) {
@@ -272,6 +291,16 @@ export default function AdminPortal() {
                 {lead.email || 'No email'} • {lead.phone} • {lead.interest}
               </p>
               {lead.message ? <p class="mt-2 text-sm text-charcoal/80">{lead.message}</p> : null}
+              <div class="mt-3 space-y-2">
+                <label class="text-[11px] font-medium uppercase tracking-wider text-muted">Notes</label>
+                <textarea
+                  value={lead.notes || ''}
+                  onInput={(e) => updateLeadNotes(lead._id, (e.target as HTMLTextAreaElement).value)}
+                  rows={2}
+                  placeholder="Add notes about this lead..."
+                  class="w-full rounded-lg border border-stone/50 px-3 py-2 text-sm text-charcoal placeholder:text-muted focus:border-gold focus:outline-none"
+                />
+              </div>
               <div class="mt-3 flex gap-2">
                 {!lead.isRead ? (
                   <button class="rounded-lg bg-charcoal px-3 py-1.5 text-xs text-white" onClick={() => markRead(lead._id)}>
@@ -280,8 +309,12 @@ export default function AdminPortal() {
                 ) : (
                   <span class="rounded-lg bg-green-100 px-3 py-1.5 text-xs text-green-700">Read</span>
                 )}
-                <button class="rounded-lg bg-red-100 px-3 py-1.5 text-xs text-red-700" onClick={() => deleteLead(lead._id)}>
-                  Delete
+                <button
+                  class="rounded-lg bg-blue-100 px-3 py-1.5 text-xs text-blue-700"
+                  onClick={() => saveLeadNotes(lead._id)}
+                  disabled={savingLeadId === lead._id}
+                >
+                  {savingLeadId === lead._id ? 'Saving...' : 'Save notes'}
                 </button>
               </div>
             </article>
@@ -365,9 +398,6 @@ export default function AdminPortal() {
                     onClick={() => saveImage(img)}
                   >
                     Save
-                  </button>
-                  <button class="rounded-lg bg-red-100 px-3 py-2 text-xs text-red-700" onClick={() => deleteImage(img._id)}>
-                    Delete
                   </button>
                 </div>
               </article>
