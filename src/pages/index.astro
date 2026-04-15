@@ -7,6 +7,8 @@ import AboutSky49 from '../components/sections/AboutSky49.astro';
 import Highlights from '../components/sections/Highlights.astro';
 import ProjectGallery from '../components/sections/ProjectGallery.astro';
 import CurrentSiteUpdates from '../components/sections/CurrentSiteUpdates.astro';
+import InvestorOpportunity from '../components/sections/InvestorOpportunity.astro';
+import InvestorsDesk from '../components/sections/InvestorsDesk.astro';
 import WhySky49Compare from '../components/sections/WhySky49Compare.astro';
 import Specifications from '../components/sections/Specifications.astro';
 import FloorPlans from '../components/sections/FloorPlans.astro';
@@ -27,11 +29,14 @@ import { site } from '../data/site';
     <StickyNav />
     <main>
       <Hero />
+      <YouTubeWalkthrough />
       <StatsBar />
       <div class="defer-render-sections">
         <AboutSky49 />
         <Highlights />
         <CurrentSiteUpdates />
+        <InvestorOpportunity />
+        <InvestorsDesk />
         <FloorPlans />
         <SitePlan />
         <WhySky49Compare />
@@ -39,7 +44,6 @@ import { site } from '../data/site';
         <Specifications />
         <AmenitiesGallery />
         <LocationProximity />
-        <YouTubeWalkthrough />
         <FAQSection />
         <ContactSection />
       </div>

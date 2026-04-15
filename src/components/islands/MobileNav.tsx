@@ -59,7 +59,7 @@ export default function MobileNav({
                 class="mt-2 block rounded-full bg-charcoal py-3 text-center text-xs font-semibold uppercase tracking-widest text-white"
                 onClick={() => setOpen(false)}
               >
-                Book free site visit
+                Register EOI Now
               </a>
             </li>
           </ul>

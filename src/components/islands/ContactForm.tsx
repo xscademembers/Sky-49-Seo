@@ -181,7 +181,7 @@ export default function ContactForm() {
         disabled={status === 'loading'}
         class="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-charcoal px-8 py-4 text-xs font-semibold uppercase tracking-widest text-white transition hover:bg-gold hover:text-charcoal disabled:opacity-60"
       >
-        {status === 'loading' ? 'Submitting…' : 'Submit inquiry'}
+        {status === 'loading' ? 'Submitting…' : 'Register EOI Now'}
       </button>
     </form>
   );
